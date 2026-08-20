@@ -2,3 +2,8 @@ fdf/*
 cub3D
 obj/*
 dep/*
+**/*.o
+**/*.d
+libft.a
+libft/dep
+libft/obj
