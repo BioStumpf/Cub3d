@@ -13,14 +13,14 @@ LIBFT_DIR := libft/
 SRCS_DIR := src/
 HEADER_DIR := headers/
 
-SRCS = main.c dummy_map_generator.c
+SRCS = main.c dummy_map_generator.c cleanup.c
 SRCS := $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS := $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 DEPS := $(patsubst $(SRCS_DIR)%.c, $(DEP_DIR)%.d, $(SRCS))
 LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 
 CFLAGS_OBJS = -Wall -Wextra -Werror -g -c $< -o $@ -I$(LIBFT_DIR) -I$(HEADER_DIR)
-CFLAGS_NAME = -Wall -Wextra -Werror -g -o $@ $(OBJS) $(LIBFT) -lm -lXext -lX11 -lmlx
+CFLAGS_NAME = -Wall -Wextra -Werror -g -o $@ $(OBJS) $(LIBFT) -lmlx -lm -lXext -lX11
 DEP_FLAGS = -MMD -MP -MT $@ -MF $(DEP_DIR)$*.d
 
 all: $(NAME)

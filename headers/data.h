@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 10:16:32 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 12:11:38 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/20 20:21:51 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ typedef struct s_game
 	void	*win;
 	t_imge	img;
 }			t_game;
+
+void	cleanup(t_game *game);
 
 #endif

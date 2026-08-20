@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 20:22:08 by dstumpf          ###   ########.fr       */
+/*   Created: 2026/08/20 20:12:36 by dstumpf           #+#    #+#             */
+/*   Updated: 2026/08/20 20:27:55 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
-#include "libft.h"
-#include "rendering.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+void	cleanup(t_game *game)
 {
-	t_game	game;
+	int	i;
 
-	if (argc != 2)
-		return (1);
-	(void)argv;
-	ft_bzero(&game, sizeof(game));
-	dummy_map(&game);
-	print_map(&game);
-	cleanup(&game);
+	if (game->img.img)
+		mlx_destroy_image(game->mlx, game->img.img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	free(game->no);
+	free(game->so);
+	free(game->we);
+	free(game->ea);
+	i = 0;
+	while (i < game->map.height)
+		free(game->map.grid[i++]);
+	free(game->map.grid);
 }
