@@ -6,15 +6,23 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 10:16:32 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 11:28:04 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/21 14:23:22 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
+# define WIDTH 1000 
+# define HEIGHT 800 
+# define NOPRINT false 
+# define PRINT true 
+# define OK 0 
+# define ERR 1 
+
 # include <mlx.h>
 # include <X11/keysym.h>
+# include <stdbool.h>
 
 typedef struct s_color
 {
@@ -36,7 +44,6 @@ typedef struct s_imge
 	int		bytes;
 	int		len;
 	int		end;
-	int		color;
 	char	*addr;
 	void	*img;
 }			t_imge;
@@ -69,6 +76,6 @@ typedef struct s_game
 	t_imge		img;
 }			t_game;
 
-void	cleanup(t_game *game);
+void	cleanup(t_game *game, bool print_err, int exit_status);
 
 #endif

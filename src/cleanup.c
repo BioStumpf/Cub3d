@@ -6,14 +6,15 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:12:36 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 20:27:55 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/21 14:37:48 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-void	cleanup(t_game *game)
+void	cleanup(t_game *game, bool print_err, int exit_status)
 {
 	int	i;
 
@@ -34,4 +35,7 @@ void	cleanup(t_game *game)
 	while (i < game->map.height)
 		free(game->map.grid[i++]);
 	free(game->map.grid);
+	if (print_err)
+		perror("Error\n");
+	exit (exit_status);
 }

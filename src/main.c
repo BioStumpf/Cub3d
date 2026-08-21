@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 20:22:08 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/21 14:37:45 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	main(int argc, char **argv)
 	dummy_map(&game);
 	// print_map(&game);
 	game_loop(&game);
-	cleanup(&game);
+	cleanup(&game, NOPRINT, OK);
 }

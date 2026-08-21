@@ -13,7 +13,7 @@ LIBFT_DIR := libft/
 SRCS_DIR := src/
 HEADER_DIR := headers/
 
-SRCS = main.c dummy_map_generator.c cleanup.c game_loop.c player_setup.c
+SRCS = main.c dummy_map_generator.c cleanup.c game_loop.c player_setup.c hooks.c
 SRCS := $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS := $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 DEPS := $(patsubst $(SRCS_DIR)%.c, $(DEP_DIR)%.d, $(SRCS))
