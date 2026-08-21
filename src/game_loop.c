@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 20:22:08 by dstumpf          ###   ########.fr       */
+/*   Created: 2026/08/21 11:21:52 by dstumpf           #+#    #+#             */
+/*   Updated: 2026/08/21 12:06:01 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
-#include "libft.h"
 #include "rendering.h"
 
-int	main(int argc, char **argv)
+void	game_loop(t_game *game)
 {
-	t_game	game;
-
-	if (argc != 2)
-		return (1);
-	(void)argv;
-	ft_bzero(&game, sizeof(game));
-	dummy_map(&game);
-	// print_map(&game);
-	game_loop(&game);
-	cleanup(&game);
+	setup_player(game);
+	print_player(game);
 }

@@ -6,11 +6,12 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:18:54 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/20 12:45:12 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/21 12:19:24 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "data.h"
 #include "libft.h"
 #include "ft_printf.h"
@@ -25,7 +26,7 @@ void	dummy_map(t_game *game)
 	game->ceiling.g = 30;
 	game->ceiling.b = 0;
 
-	game->map.width = 35;
+	game->map.width = 33;
 	game->map.height = 14;
 
 	game->map.grid = malloc(sizeof(char *) * game->map.height);
@@ -42,10 +43,10 @@ void	dummy_map(t_game *game)
 	game->map.grid[7] = ft_strdup("11110111111111011101010010001    ");
 	game->map.grid[8] = ft_strdup("11000000110101011100000010001    ");
 	game->map.grid[9] = ft_strdup("10000000000000001100000010001    ");
-	game->map.grid[10] = ft_strdup("10000000000000001101010010001   ");
-	game->map.grid[11] = ft_strdup("11000001110101011111011110N0111 ");
-	game->map.grid[12] = ft_strdup("11110111 1110101 101111010001   ");
-	game->map.grid[13] = ft_strdup("11111111 1111111 111111111111   ");
+	game->map.grid[10] = ft_strdup("10000000000000001101010010001    ");
+	game->map.grid[11] = ft_strdup("11000001110101011111011110N0111  ");
+	game->map.grid[12] = ft_strdup("11110111 1110101 101111010001    ");
+	game->map.grid[13] = ft_strdup("11111111 1111111 111111111111    ");
 }
 
 void	print_map(t_game *game)
@@ -58,4 +59,11 @@ void	print_map(t_game *game)
 		ft_printf(1, "%s\n", game->map.grid[y]);
 		y++;
 	}
+}
+
+void	print_player(t_game *game)
+{
+	printf("pos: %f %f\n", game->player.pos.x, game->player.pos.y);
+	printf("dir: %f %f\n", game->player.dir.x, game->player.dir.y);
+	printf("cam: %f %f\n", game->player.cam.x, game->player.cam.y);
 }
