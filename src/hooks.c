@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 14:44:11 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/21 15:41:16 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ static int	key_press(int keysym, void *param)
 	game = (t_game *)param;
 	if (keysym == XK_Escape)
 		mlx_loop_end(game->mlx);
+	game->player.pos.x += (keysym == XK_w) * (game->player.dir.x * WALK_SPEED);
+	game->player.pos.y += (keysym == XK_w) * (game->player.dir.y * WALK_SPEED);
+	game->player.pos.x -= (keysym == XK_s) * (game->player.dir.x * WALK_SPEED);
+	game->player.pos.y -= (keysym == XK_s) * (game->player.dir.y * WALK_SPEED);
+	game->player.pos.x += (keysym == XK_d) * (game->player.cam.x * WALK_SPEED);
+	game->player.pos.y += (keysym == XK_d) * (game->player.cam.y * WALK_SPEED);
+	game->player.pos.x -= (keysym == XK_a) * (game->player.cam.x * WALK_SPEED);
+	game->player.pos.y -= (keysym == XK_a) * (game->player.cam.y * WALK_SPEED);
+	
+	game->player.dir.x += (keysym == XK_Right) * (game->player.cam.x * SPEED);
+	game->player.dir.y += (keysym == XK_Right) * (game->player.cam.y * SPEED);
+	game->player.dir.x -= (keysym == XK_Left) * (game->player.cam.x * SPEED);
+	game->player.dir.y -= (keysym == XK_Left) * (game->player.cam.y * SPEED);
+
 	return (0);
 }
 
