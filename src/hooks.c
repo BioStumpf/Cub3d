@@ -6,12 +6,14 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 15:41:16 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/22 10:40:04 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <math.h>
 #include "data.h"
+#include "rendering.h"
 
 // static int	draw_img(void *param)
 // {
@@ -23,6 +25,23 @@
 // 	return (0);
 // }
 
+static void	rotate(t_2d *vector, double angle)
+{
+	double	x;
+	double	y;
+
+	x = vector->x;
+	y = vector->y;
+	vector->x = x * cos(angle) - y * sin(angle);
+	vector->y = x * sin(angle) + y * cos(angle);
+}
+
+static void	translate(t_2d *pos, t_2d *dir, double step)
+{
+	pos->x += dir->x * step;
+	pos->y += dir->y * step;
+}
+
 static int	key_press(int keysym, void *param)
 {
 	t_game	*game;
@@ -30,20 +49,22 @@ static int	key_press(int keysym, void *param)
 	game = (t_game *)param;
 	if (keysym == XK_Escape)
 		mlx_loop_end(game->mlx);
-	game->player.pos.x += (keysym == XK_w) * (game->player.dir.x * WALK_SPEED);
-	game->player.pos.y += (keysym == XK_w) * (game->player.dir.y * WALK_SPEED);
-	game->player.pos.x -= (keysym == XK_s) * (game->player.dir.x * WALK_SPEED);
-	game->player.pos.y -= (keysym == XK_s) * (game->player.dir.y * WALK_SPEED);
-	game->player.pos.x += (keysym == XK_d) * (game->player.cam.x * WALK_SPEED);
-	game->player.pos.y += (keysym == XK_d) * (game->player.cam.y * WALK_SPEED);
-	game->player.pos.x -= (keysym == XK_a) * (game->player.cam.x * WALK_SPEED);
-	game->player.pos.y -= (keysym == XK_a) * (game->player.cam.y * WALK_SPEED);
-	
-	game->player.dir.x += (keysym == XK_Right) * (game->player.cam.x * SPEED);
-	game->player.dir.y += (keysym == XK_Right) * (game->player.cam.y * SPEED);
-	game->player.dir.x -= (keysym == XK_Left) * (game->player.cam.x * SPEED);
-	game->player.dir.y -= (keysym == XK_Left) * (game->player.cam.y * SPEED);
-
+	if (keysym == XK_w)
+		translate(&game->player.pos, &game->player.dir, WALK);
+	else if (keysym == XK_s)
+		translate(&game->player.pos, &game->player.dir, -WALK);
+	else if (keysym == XK_d)
+		translate(&game->player.pos, &game->player.cam, WALK);
+	else if (keysym == XK_a)
+		translate(&game->player.pos, &game->player.cam, -WALK);
+	else if (keysym == XK_Right || keysym == XK_Left)
+	{
+		if (keysym == XK_Right)
+			rotate(&game->player.dir, ROT);
+		else
+			rotate(&game->player.dir, -ROT);
+		set_camera(game);
+	}
 	return (0);
 }
 

@@ -5,6 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/22 10:16:30 by dstumpf           #+#    #+#             */
+/*   Updated: 2026/08/22 10:19:19 by dstumpf          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */ /*                                                        :::      ::::::::   */
+/*   data.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 10:16:32 by dstumpf           #+#    #+#             */
 /*   Updated: 2026/08/21 15:41:18 by dstumpf          ###   ########.fr       */
 /*                                                                            */
@@ -19,8 +30,8 @@
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK_SPEED 0.1 
-#define ROT_SPEED 0.1
+# define WALK 0.1 
+#define ROT 0.1
 
 # include <mlx.h>
 # include <X11/keysym.h>
