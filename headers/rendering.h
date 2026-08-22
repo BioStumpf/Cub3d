@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 14:32:38 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/22 15:10:19 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define RENDERING_H
 
 # include "data.h"
+
+typedef struct	s_dda
+{
+	bool	wall_hit;
+	t_2d	cur_point;
+	t_2d	step_size;
+	t_2d	step_direction;
+	t_2d	ray_len;
+}			t_dda;
 
 //delete later
 void	dummy_map(t_game *game);
