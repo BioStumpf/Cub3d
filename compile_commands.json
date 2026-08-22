@@ -1,25 +1,20 @@
 [
- {
-  "directory": "/home/dstumpf/cub3d",
-  "arguments": [
-   "cc",
-   "-Wall",
-   "-Wextra",
-   "-Werror",
-   "-g",
-   "-c",
-   "src/main.c",
-   "-o",
-   "obj/main.o",
-   "-Ilibft/",
-   "-Iheaders/",
-   "-MMD",
-   "-MP",
-   "-MT",
-   "obj/main.o",
-   "-MF",
-   "dep/main.d"
-  ],
-  "file": "src/main.c"
- }
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-Ilibft/",
+      "-Iheaders/",
+      "-o",
+      "obj/draw_map.o",
+      "src/draw_map.c"
+    ],
+    "directory": "/home/david/cub3d",
+    "file": "/home/david/cub3d/src/draw_map.c",
+    "output": "/home/david/cub3d/obj/draw_map.o"
+  }
 ]

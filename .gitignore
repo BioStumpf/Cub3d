@@ -7,3 +7,5 @@ dep/*
 libft.a
 libft/dep
 libft/obj
+.cache/
+compile_commands.json
