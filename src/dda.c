@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/23 18:16:47 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/08/23 20:00:51 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_2d	dda(t_game *game, t_2d *ray)
 	init_dda(game, ray, &dda);
 	while (true)
 	{
-		if (dda.step_size.x < dda.step_size.y)
+		if (dda.ray_len.x < dda.ray_len.y)
 		{
 			dda.ray_pos.x += dda.step_dir.x;
 			dda.ray_len.x += dda.step_size.x;
