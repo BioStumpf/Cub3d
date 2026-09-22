@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:21:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 14:34:53 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 16:11:17 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	init_img(t_game *game)
 	if (!game->img.img)
 		return (false);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits,
-		&game->img.len, &game->img.end);
+			&game->img.len, &game->img.end);
 	game->img.bytes = game->img.bits / 8;
 	return (true);
 }
@@ -37,10 +37,10 @@ static void	init_mlx(t_game *game)
 		cleanup(game, PRINT, ERR);
 }
 
+	// print_player(game); ->potentially after setup_player
 void	game_loop(t_game *game)
 {
 	setup_player(game);
-	// print_player(game);
 	init_mlx(game);
 	init_hooks(game);
 	mlx_loop(game->mlx);

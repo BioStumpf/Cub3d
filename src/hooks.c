@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/23 18:45:19 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 16:08:07 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	translate(t_game *game, double step)
 	new_pos = game->player.pos;
 	new_pos.x += game->player.dir.x * step;
 	new_pos.y += game->player.dir.y * step;
-	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != 1)
+	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != WALL)
 		game->player.pos = new_pos;
 }
 

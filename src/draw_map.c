@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:58:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/23 20:04:59 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 16:12:13 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ static void	draw_wall(t_game *game, t_2d *wall, int screen_x)
 	int		wall_top;
 	double	distance;
 
-	distance = sqrt(pow(wall->x - game->player.pos.x, 2) + pow(wall->y - game->player.pos.y, 2));
+	distance = sqrt(pow(wall->x - game->player.pos.x, 2)
+			+ pow(wall->y - game->player.pos.y, 2));
 	wall_height = (int)(HEIGHT / distance);
 	wall_bottom = (HEIGHT - wall_height) / 2;
-	wall_top   = (HEIGHT + wall_height) / 2;
+	wall_top = (HEIGHT + wall_height) / 2;
 	while (wall_bottom < wall_top)
 		pixel_to_img(&game->img, screen_x, wall_bottom++, 0xFFFFFF);
 }

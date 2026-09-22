@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/23 18:44:22 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 16:13:41 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "data.h"
 
-typedef struct	s_dda
+typedef struct s_dda
 {
 	t_2d	ray_pos;
 	t_2d	step_size;

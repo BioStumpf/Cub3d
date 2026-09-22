@@ -5,25 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 10:16:30 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/22 11:05:16 by dstumpf          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */ /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 10:16:32 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 15:41:18 by dstumpf          ###   ########.fr       */
+/*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
+/*   Updated: 2026/09/22 16:15:28 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
+# define WALL '1' 
 # define WIDTH 1000 
 # define HEIGHT 800 
 # define NOPRINT false 
@@ -31,7 +21,7 @@
 # define OK 0 
 # define ERR 1 
 # define WALK 0.1 
-#define ROT 0.1
+# define ROT 0.1
 
 # include <mlx.h>
 # include <X11/keysym.h>
@@ -87,7 +77,7 @@ typedef struct s_game
 	void		*win;
 	t_player	player;
 	t_imge		img;
-}			t_game;
+}				t_game;
 
 void	cleanup(t_game *game, bool print_err, int exit_status);
 
