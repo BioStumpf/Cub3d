@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 16:15:28 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 22:10:10 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK 0.1 
-# define ROT 0.1
+# define WALK 0.05 
+# define ROT 0.05
 
 # include <mlx.h>
 # include <X11/keysym.h>
@@ -64,8 +64,19 @@ typedef struct s_player
 	t_2d	cam;
 }			t_player;
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_keys;
+
 typedef struct s_game
 {
+	t_keys		keys;
 	char		*no;
 	char		*so;
 	char		*we;
