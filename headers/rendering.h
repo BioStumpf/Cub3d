@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 16:13:41 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 22:19:03 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	print_player(t_game *game);
 //player functions
 void	set_camera(t_game *game);
 void	setup_player(t_game *game);
+
+//moving the player around (rotate/translate);
+//used inside mlx loop hook right before drawing
+int		move_player(t_game *game);
 
 //game
 void	game_loop(t_game *game);
