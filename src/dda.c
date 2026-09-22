@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 16:08:25 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/22 21:02:00 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	init_dda(t_game *game, t_2d *ray, t_dda *dda)
 {
 	dda->ray_pos.x = floor(game->player.pos.x);
 	dda->ray_pos.y = floor(game->player.pos.y);
-	dda->step_size.x = sqrt(1 + pow((ray->x / ray->y), 2));
-	dda->step_size.y = sqrt(1 + pow((ray->y / ray->x), 2));
+	dda->step_size.x = sqrt(1 + pow((ray->y / ray->x), 2));
+	dda->step_size.y = sqrt(1 + pow((ray->x / ray->y), 2));
 	init_step_dir(ray, dda);
 	init_ray_len(game, dda);
 }
