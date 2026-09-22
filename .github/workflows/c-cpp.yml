@@ -1,0 +1,32 @@
+name: main_tester
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+  
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt install python3-setuptools
+        sudo apt install pipx
+        pipx install norminette
+        pipx ensurepath
+
+    - name: Norm
+      run: make norm
+
+    # - name: Build
+    #   run: make
+  
+    # - name: Run tester
+    #   run: make test
