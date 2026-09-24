@@ -6,20 +6,28 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 22:18:47 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/24 16:02:28 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <sys/time.h>
 #include "data.h"
 #include "libft.h"
 #include "rendering.h"
 
 static int	draw_img(void *param)
 {
-	t_game	*game;
+	struct timeval	tv;
+	double			now;
+	t_game			*game;
 
 	game = (t_game *)param;
+	gettimeofday(&tv, NULL);
+	now = tv.tv_sec + tv.tv_usec / 1000000.0;
+	if (now - game->last_frame < 1.0 / FPS)
+		return (0);
+	game->last_frame = now;
 	move_player(game);
 	ft_bzero(game->img.addr, game->img.len * HEIGHT);
 	raycast(game);

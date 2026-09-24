@@ -1,20 +1,209 @@
 [
-  {
-    "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-g",
-      "-c",
-      "-Ilibft/",
-      "-Iheaders/",
-      "-o",
-      "obj/draw_map.o",
-      "src/draw_map.c"
-    ],
-    "directory": "/home/david/cub3d",
-    "file": "/home/david/cub3d/src/draw_map.c",
-    "output": "/home/david/cub3d/obj/draw_map.o"
-  }
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/main.c",
+   "-o",
+   "obj/main.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/main.o",
+   "-MF",
+   "dep/main.d"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/dummy_map_generator.c",
+   "-o",
+   "obj/dummy_map_generator.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/dummy_map_generator.o",
+   "-MF",
+   "dep/dummy_map_generator.d"
+  ],
+  "file": "src/dummy_map_generator.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/cleanup.c",
+   "-o",
+   "obj/cleanup.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/cleanup.o",
+   "-MF",
+   "dep/cleanup.d"
+  ],
+  "file": "src/cleanup.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/game_loop.c",
+   "-o",
+   "obj/game_loop.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/game_loop.o",
+   "-MF",
+   "dep/game_loop.d"
+  ],
+  "file": "src/game_loop.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/player_setup.c",
+   "-o",
+   "obj/player_setup.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/player_setup.o",
+   "-MF",
+   "dep/player_setup.d"
+  ],
+  "file": "src/player_setup.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/hooks.c",
+   "-o",
+   "obj/hooks.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/hooks.o",
+   "-MF",
+   "dep/hooks.d"
+  ],
+  "file": "src/hooks.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/draw_map.c",
+   "-o",
+   "obj/draw_map.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/draw_map.o",
+   "-MF",
+   "dep/draw_map.d"
+  ],
+  "file": "src/draw_map.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/dda.c",
+   "-o",
+   "obj/dda.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/dda.o",
+   "-MF",
+   "dep/dda.d"
+  ],
+  "file": "src/dda.c"
+ },
+ {
+  "directory": "/home/dstumpf/cub3d",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-c",
+   "src/move_player.c",
+   "-o",
+   "obj/move_player.o",
+   "-Ilibft/",
+   "-Iheaders/",
+   "-MMD",
+   "-MP",
+   "-MT",
+   "obj/move_player.o",
+   "-MF",
+   "dep/move_player.d"
+  ],
+  "file": "src/move_player.c"
+ }
 ]
