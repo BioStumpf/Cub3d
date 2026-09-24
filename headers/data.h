@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 22:10:10 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/24 16:04:15 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK 0.05 
-# define ROT 0.05
+# define WALK 0.04 
+# define ROT 0.02
+# define FPS 60.0
 
 # include <mlx.h>
 # include <X11/keysym.h>
@@ -84,6 +85,7 @@ typedef struct s_game
 	t_color		floor;
 	t_color		ceiling;
 	t_map		map;
+	double		last_frame;
 	void		*mlx;
 	void		*win;
 	t_player	player;

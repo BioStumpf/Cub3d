@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:21:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 21:56:47 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/24 16:01:33 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static bool	init_img(t_game *game)
 	return (true);
 }
 
+// mlx_do_key_autorepeatoff(game->mlx); //do i need this???
 static void	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		cleanup(game, PRINT, ERR);
-	mlx_do_key_autorepeatoff(game->mlx);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3d");
 	if (!game->win)
 		cleanup(game, PRINT, ERR);
