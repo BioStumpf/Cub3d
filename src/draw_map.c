@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:58:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 16:12:13 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/29 17:22:04 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	pixel_to_img(t_imge *img, int x, int y, uint64_t color)
 		pixel_addr[i] = (color >> (8 * i)) & 0xFF;
 }
 
-static void	draw_wall(t_game *game, t_2d *wall, int screen_x)
+static void	draw_wall(t_game *game, double wall, int screen_x, side)
 {
 	int		wall_height;
 	int		wall_bottom;
@@ -47,9 +47,10 @@ static void	draw_wall(t_game *game, t_2d *wall, int screen_x)
 void	raycast(t_game *game)
 {
 	int		screen_x;
+	int		side;
 	double	cam_x;
+	double	wall_distance;
 	t_2d	ray;
-	t_2d	wall;
 
 	screen_x = -1;
 	while (++screen_x < WIDTH)
@@ -57,7 +58,7 @@ void	raycast(t_game *game)
 		cam_x = 2.0 * screen_x / WIDTH - 1.0;
 		ray.x = game->player.dir.x + game->player.cam.x * cam_x;
 		ray.y = game->player.dir.y + game->player.cam.y * cam_x;
-		wall = dda(game, &ray);
-		draw_wall(game, &wall, screen_x);
+		wall_distance = dda(game, &ray, &side);
+		draw_wall(game, wall_distance, screen_x, side);
 	}
 }

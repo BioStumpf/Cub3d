@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 21:02:00 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/29 17:51:28 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	init_dda(t_game *game, t_2d *ray, t_dda *dda)
 	init_ray_len(game, dda);
 }
 
-t_2d	dda(t_game *game, t_2d *ray)
+void	dda(t_game *game, t_2d *ray, t_hit *hit)
 {
 	t_dda	dda;
 
@@ -63,13 +63,16 @@ t_2d	dda(t_game *game, t_2d *ray)
 		{
 			dda.ray_pos.x += dda.step_dir.x;
 			dda.ray_len.x += dda.step_size.x;
+			dda.side = X;
 		}
 		else
 		{
 			dda.ray_pos.y += dda.step_dir.y;
 			dda.ray_len.y += dda.step_size.y;
+			dda.side = Y;
 		}
 		if (game->map.grid[(int)dda.ray_pos.y][(int)dda.ray_pos.x] == WALL)
-			return ((t_2d){dda.ray_pos.x, dda.ray_pos.y});
+			break ;
+			// return ((t_2d){dda.ray_pos.x, dda.ray_pos.y});
 	}
 }
