@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:12:36 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 16:45:40 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 14:55:43 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	cleanup(t_game *game, bool print_err, int exit_status)
+static void	clean_mlx(t_game *game)
 {
-	int	i;
-
+	if (game->no_tex.img.img)
+		mlx_destroy_image(game->mlx, game->no_tex.img.img);
+	if (game->so_tex.img.img)
+		mlx_destroy_image(game->mlx, game->so_tex.img.img);
+	if (game->we_tex.img.img)
+		mlx_destroy_image(game->mlx, game->we_tex.img.img);
+	if (game->ea_tex.img.img)
+		mlx_destroy_image(game->mlx, game->ea_tex.img.img);
 	if (game->img.img)
 		mlx_destroy_image(game->mlx, game->img.img);
 	if (game->win)
@@ -27,10 +33,18 @@ void	cleanup(t_game *game, bool print_err, int exit_status)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	free(game->no);
-	free(game->so);
-	free(game->we);
-	free(game->ea);
+}
+
+//add this later, for now the paths are hardcoded
+	// free(game->no);
+	// free(game->so);
+	// free(game->we);
+	// free(game->ea);
+void	cleanup(t_game *game, bool print_err, int exit_status)
+{
+	int	i;
+
+	clean_mlx(game);
 	i = 0;
 	while (i < game->map.height)
 		free(game->map.grid[i++]);

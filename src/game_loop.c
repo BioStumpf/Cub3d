@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:21:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/24 16:01:33 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 14:48:23 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,30 @@ static bool	init_img(t_game *game)
 	return (true);
 }
 
+static void	init_tex(t_game *game, t_tex *tex, char *path)
+{
+	tex->img.img = mlx_xpm_file_to_image(game->mlx, path,
+		&tex->width, &tex->height);
+	if (!tex->img.img)
+		return ;
+	tex->img.addr = mlx_get_data_addr(tex->img.img, &tex->img.bytes,
+		&tex->img.len, &tex->img.end);
+}
+
+static bool	init_textures(t_game *game)
+{
+	if (!game->no)
+		return (false);
+	init_tex(game, &game->no_tex, game->no);
+	init_tex(game, &game->so_tex, game->so);
+	init_tex(game, &game->we_tex, game->we);
+	init_tex(game, &game->ea_tex, game->ea);
+	if (!game->no_tex.img.img || !game->so_tex.img.img
+		|| !game->we_tex.img.img || !game->ea_tex.img.img)
+		return (false);
+	return (true);
+}
+
 // mlx_do_key_autorepeatoff(game->mlx); //do i need this???
 static void	init_mlx(t_game *game)
 {
@@ -35,6 +59,8 @@ static void	init_mlx(t_game *game)
 	if (!game->win)
 		cleanup(game, PRINT, ERR);
 	if (!init_img(game))
+		cleanup(game, PRINT, ERR);
+	if (!init_textures(game))
 		cleanup(game, PRINT, ERR);
 }
 

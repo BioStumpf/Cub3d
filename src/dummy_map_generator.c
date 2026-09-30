@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:18:54 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 12:55:11 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 14:54:05 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	dummy_map(t_game *game)
 
 	game->map.width = 33;
 	game->map.height = 14;
+
+	game->no = "./textures/north.xpm";
+	game->so = "./textures/south.xpm";
+	game->ea = "./textures/east.xpm";
+	game->we = "./textures/west.xpm";
 
 	game->map.grid = malloc(sizeof(char *) * game->map.height);
 	if (!game->map.grid)

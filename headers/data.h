@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 12:56:41 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 16:35:00 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@
 # include <X11/keysym.h>
 # include <stdbool.h>
 
-// typedef struct s_color
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// }		t_color;
-
 typedef struct s_map
 {
 	int		width;
@@ -51,6 +44,13 @@ typedef struct s_imge
 	char	*addr;
 	void	*img;
 }			t_imge;
+
+typedef struct	s_tex
+{
+	int		width;
+	int		height;
+	t_imge	img;
+}			t_tex;
 
 typedef struct s_2d
 {
@@ -90,6 +90,10 @@ typedef struct s_game
 	void		*win;
 	t_player	player;
 	t_imge		img;
+	t_tex		no_tex;
+	t_tex		so_tex;
+	t_tex		we_tex;
+	t_tex		ea_tex;
 }				t_game;
 
 void	cleanup(t_game *game, bool print_err, int exit_status);

@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 11:18:30 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 17:26:21 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct s_dda
 	t_2d	step_dir;
 	t_2d	ray_len;
 }			t_dda;
+
+typedef struct s_wall_tex
+{
+	int		x;
+	int		height;
+	int		bottom;
+	int		top;
+	t_tex	*texture;
+}			t_wall_tex;
 
 //delete later
 void	dummy_map(t_game *game);
