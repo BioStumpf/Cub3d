@@ -6,14 +6,12 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/29 17:51:27 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 11:18:30 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_H
 # define RENDERING_H
-# define X 0
-# define Y 1
 
 # include "data.h"
 
@@ -33,11 +31,12 @@ typedef struct s_hit
 
 typedef struct s_dda
 {
+	t_face	face_x;
+	t_face	face_y;
 	t_2d	ray_pos;
 	t_2d	step_size;
 	t_2d	step_dir;
 	t_2d	ray_len;
-	int		side;
 }			t_dda;
 
 //delete later
@@ -59,6 +58,6 @@ void	init_hooks(t_game *game);
 
 //dda and drawing
 void	raycast(t_game *game);
-double	dda(t_game *game, t_2d *ray, int *side);
+void	dda(t_game *game, t_2d *ray, t_hit *hit);
 
 #endif

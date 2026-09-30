@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/24 16:04:15 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 12:56:41 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK 0.04 
+# define WALK 0.02 
 # define ROT 0.02
-# define FPS 60.0
+# define FPS 100.0
 
 # include <mlx.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}		t_color;
+// typedef struct s_color
+// {
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }		t_color;
 
 typedef struct s_map
 {
@@ -77,13 +77,13 @@ typedef struct s_keys
 
 typedef struct s_game
 {
+	int			floor;
+	int			ceiling;
 	t_keys		keys;
 	char		*no;
 	char		*so;
 	char		*we;
 	char		*ea;
-	t_color		floor;
-	t_color		ceiling;
 	t_map		map;
 	double		last_frame;
 	void		*mlx;

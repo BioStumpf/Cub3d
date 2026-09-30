@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:18:54 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 12:19:24 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 12:55:11 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@
 
 void	dummy_map(t_game *game)
 {
-	game->floor.r = 220;
-	game->floor.g = 100;
-	game->floor.b = 0;
-
-	game->ceiling.r = 225;
-	game->ceiling.g = 30;
-	game->ceiling.b = 0;
+	game->floor = 220 << 16 | 100 << 8 | 0;
+	game->floor = 225 << 16 | 30 << 8 | 0;
 
 	game->map.width = 33;
 	game->map.height = 14;
@@ -41,7 +36,7 @@ void	dummy_map(t_game *game)
 	game->map.grid[5] = ft_strdup("100000000011000001110111111111111");
 	game->map.grid[6] = ft_strdup("11110111111111011100000010001    ");
 	game->map.grid[7] = ft_strdup("11110111111111011101010010001    ");
-	game->map.grid[8] = ft_strdup("11000000110101011100000010001    ");
+	game->map.grid[8] = ft_strdup("11000000110101011100000000001    ");
 	game->map.grid[9] = ft_strdup("10000000000000001100000010001    ");
 	game->map.grid[10] = ft_strdup("10000000000000001101010010001    ");
 	game->map.grid[11] = ft_strdup("11000001110101011111011110N0111  ");

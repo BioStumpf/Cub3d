@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/29 17:51:28 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/09/30 12:22:36 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,32 @@
 #include "rendering.h"
 #include <math.h>
 
+//the face_x and face_y indicate where the ray will hit the wall
+//if me move -x, we move west, which means we will hit the wall east
+//if me move -y (up), we move north, wall hit south
+//this is important to know for the textures later
 static void	init_step_dir(t_2d *ray, t_dda *dda)
 {
 	if (ray->x < 0)
+	{
 		dda->step_dir.x = -1;
+		dda->face_x = EAST;
+	}
 	else
+	{
 		dda->step_dir.x = 1;
+		dda->face_x = WEST;
+	}
 	if (ray->y < 0)
+	{
 		dda->step_dir.y = -1;
+		dda->face_y = SOUTH;
+	}
 	else
+	{
 		dda->step_dir.y = 1;
+		dda->face_y = NORTH;
+	}
 }
 
 static void	init_ray_len(t_game *game, t_dda *dda)
@@ -42,14 +58,28 @@ static void	init_ray_len(t_game *game, t_dda *dda)
 			* dda->step_size.y;
 }
 
+//this is the lenght of the vector to travel one unit into x/y direction
+//i changed it to a normalizes step size, indicating how many
+//vectors need to be traveled instead of their lenght which removes
+//the fisheye
+	// dda->step_size.x = sqrt(1 + pow((ray->y / ray->x), 2));
+	// dda->step_size.y = sqrt(1 + pow((ray->x / ray->y), 2));
 static void	init_dda(t_game *game, t_2d *ray, t_dda *dda)
 {
 	dda->ray_pos.x = floor(game->player.pos.x);
 	dda->ray_pos.y = floor(game->player.pos.y);
-	dda->step_size.x = sqrt(1 + pow((ray->y / ray->x), 2));
-	dda->step_size.y = sqrt(1 + pow((ray->x / ray->y), 2));
+	dda->step_size.x = 1 / fabs(ray->x);
+	dda->step_size.y = 1 / fabs(ray->y);
 	init_step_dir(ray, dda);
 	init_ray_len(game, dda);
+}
+
+static void	calc_hit(t_dda *dda, t_hit *hit)
+{
+	if (hit->face == WEST || hit->face == EAST)
+		hit->dist = dda->ray_len.x - dda->step_size.x;
+	else
+		hit->dist = dda->ray_len.y - dda->step_size.y;
 }
 
 void	dda(t_game *game, t_2d *ray, t_hit *hit)
@@ -63,16 +93,16 @@ void	dda(t_game *game, t_2d *ray, t_hit *hit)
 		{
 			dda.ray_pos.x += dda.step_dir.x;
 			dda.ray_len.x += dda.step_size.x;
-			dda.side = X;
+			hit->face = dda.face_x;
 		}
 		else
 		{
 			dda.ray_pos.y += dda.step_dir.y;
 			dda.ray_len.y += dda.step_size.y;
-			dda.side = Y;
+			hit->face = dda.face_y;
 		}
 		if (game->map.grid[(int)dda.ray_pos.y][(int)dda.ray_pos.x] == WALL)
 			break ;
-			// return ((t_2d){dda.ray_pos.x, dda.ray_pos.y});
 	}
+	return (calc_hit(&dda, hit));
 }
