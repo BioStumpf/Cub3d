@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 11:47:01 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 12:19:34 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 # define DATA_H
 
 # define WALL '1' 
-# define WIDTH 1000 
-# define HEIGHT 800 
+# define WIDTH 1920
+# define HEIGHT 1080
 # define NOPRINT false 
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK 0.04 
-# define ROT 0.05
-# define FPS 100.0
+# define WALK 2.7 
+# define ROT 2.4
+# define FPS 200.0
 
 # include <mlx.h>
 # include <X11/keysym.h>
