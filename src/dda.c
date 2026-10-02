@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 12:22:36 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 10:56:16 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static void	init_step_dir(t_2d *ray, t_dda *dda)
 	}
 }
 
+//ray_len.x and y represent the length to the next whole cell
+//x is the length needed to traverse the next vertical line
+//y is the lenght needed to traverse the next horizontal line
+//if we step in -x, we initialize ray_len.x so that its the 
+//the actual player position on the x axis (floating point number)
+//minus the floored/rounded down player position/ray position
+//this is the x distance, but we want to know the distance along
+//the ray needed to travel to get there, so times step_size.x
+//for positive x-step direction we add + 1 to the floored player
+//position/ray position and subtrac the floating point player
+//position from it, again multiplying by step size in x
+//for y its the same
 static void	init_ray_len(t_game *game, t_dda *dda)
 {
 	if (dda->step_dir.x < 0)
@@ -82,6 +94,14 @@ static void	calc_hit(t_dda *dda, t_hit *hit)
 		hit->dist = dda->ray_len.y - dda->step_size.y;
 }
 
+// since ray len represents the distance to the next horizontal(ray_len.y)
+// or vertical (ray_len.x) line, we just check whichever is closer
+// and go one whole unit in that direction (x or y)
+// that way we traverse all the cells accross our ray path
+// once hitting the wall, we subtract one step size,
+// since it indicates the distance to the next and not the current cell
+// from the starting point
+// this distance is what we return
 void	dda(t_game *game, t_2d *ray, t_hit *hit)
 {
 	t_dda	dda;

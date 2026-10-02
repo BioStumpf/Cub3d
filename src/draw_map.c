@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:58:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 17:26:57 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 11:34:03 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 	// if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 	// 	return ;
-static void	pixel_to_img(t_imge *img, int x, int y, uint64_t color)
+static void	pixel_to_img(t_imge *img, int x, int y, uint32_t color)
 {
 	char	*pixel_addr;
 	int		i;
@@ -32,8 +32,17 @@ static void	pixel_to_img(t_imge *img, int x, int y, uint64_t color)
 //if we face an east or western wall, that means 
 //this horizontal direction is actually the y coordinates
 //in our map. if e.g. we hit the wall at (2, 1.2)
-//on an eastern facing wall, we are at 20% of the texture in x direction
+//on an western facing wall, we are at 20% of the texture in x direction
 //which gives us the texture column we need to draw
+//if our ray hit a wall facing NORTH or EAST, we need to reverse the
+//x coordinate.
+//e.g. if we look at a wall facing NORTH, we ourselfs face south,
+//meaning the maps x axis is inverted (the texture needs to be drawn
+//left to right, while our x axis goes from right to left)
+//so in these cases we take the distance to the ceiled actual coordinate
+//e.g.: 1.2: ceil(1.2) - 1.2 = 0.8
+//while in the other cases we would take 0.2 as the fraction
+//note: hit->face is where the wall itself faces not the player
 static void	set_texture(t_game *game, t_2d *ray, t_hit *hit,
 		t_wall_tex *wall)
 {
@@ -44,31 +53,41 @@ static void	set_texture(t_game *game, t_2d *ray, t_hit *hit,
 	else
 		cell_x = game->player.pos.x + ray->x * hit->dist;
 	if (hit->face == NORTH)
-		wall->texture = &game->no_tex;
-	else if (hit->face == SOUTH)
 		wall->texture = &game->so_tex;
+	else if (hit->face == SOUTH)
+		wall->texture = &game->no_tex;
 	else if (hit->face == EAST)
-		wall->texture = &game->ea_tex;
-	else if (hit->face == WEST)
 		wall->texture = &game->we_tex;
+	else if (hit->face == WEST)
+		wall->texture = &game->ea_tex;
 	if (hit->face == NORTH || hit->face == EAST)
 		wall->x = (ceil(cell_x) - cell_x) * wall->texture->width;
 	else
 		wall->x = (cell_x - floor(cell_x)) * wall->texture->width;
 }
 
-static int	tex_color(t_wall_tex *wall, int screen_y)
+//so first we alrady know that our screen y is inside the wall cooords
+//cause we only go inside this funcion once the else statement
+//in draw_wall is triggered
+//so screen_y > wall->top.
+//to normalize the wall coordinates from 0 to wall_height, we subtract wall->top
+//(remember the screen draws top to bottom so the top has lower coords)
+//from that coordinate.
+//once done, we divide by wall->height, which gives us a percentage.
+//that percentage multiplied by t->height (texture height)
+//gives the y coordinate of that specific texture
+//once that is done, we mutliply with the factor:
+//t->height / wall->height, which normalizes the textures height
+//with respect to our wall height.
+//
+static uint32_t	tex_color(t_wall_tex *wall, int screen_y)
 {
 	t_tex	*t;
 	int		wall_y;
 
 	t = wall->texture;
 	wall_y = (screen_y - wall->top) * t->height / wall->height;
-	if (wall_y < 0)
-		wall_y = 0;
-	if (wall_y >= t->height)
-		wall_y = t->height - 1;
-	return (*(unsigned int *)(t->img.addr
+	return (*(uint32_t *)(t->img.addr
 		+ wall_y * t->img.len + wall->x * t->img.bytes));
 }
 
@@ -99,13 +118,24 @@ static void	draw_wall(t_game *game, int screen_x, t_hit *hit, t_2d *ray)
 	{
 		if (y < wall.top)
 			pixel_to_img(&game->img, screen_x, y, game->ceiling);
-		else if (y > wall.bottom)
+		else if (y >= wall.bottom)
 			pixel_to_img(&game->img, screen_x, y, game->floor);
 		else
 			pixel_to_img(&game->img, screen_x, y, tex_color(&wall, y));
 	}
 }
 
+// so we iterate through the entire screen width and compute 
+// a normalized camera_x position between -1 and 1
+// using the players camera vector, we multiply this scalar
+// camera x coordinate with that camera vector, iteratively
+// giving the cam vector a range of lenght
+// adding this to the players view direction gives the ray vector
+// hence the direction the ray is pointing in (and an unnormalized lenght)
+// using this ray, we do dda, ergo we scan every cell along this ray until
+// hitting an obstacle
+// the length returned from dda is then used to scale the height of the
+// wall that was just hit
 void	raycast(t_game *game)
 {
 	int		screen_x;

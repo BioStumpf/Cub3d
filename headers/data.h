@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 16:35:00 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 11:47:01 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define PRINT true 
 # define OK 0 
 # define ERR 1 
-# define WALK 0.02 
-# define ROT 0.02
+# define WALK 0.04 
+# define ROT 0.05
 # define FPS 100.0
 
 # include <mlx.h>
@@ -45,7 +45,7 @@ typedef struct s_imge
 	void	*img;
 }			t_imge;
 
-typedef struct	s_tex
+typedef struct s_tex
 {
 	int		width;
 	int		height;
