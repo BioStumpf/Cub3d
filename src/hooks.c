@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/24 16:02:28 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 12:09:42 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ static int	draw_img(void *param)
 {
 	struct timeval	tv;
 	double			now;
+	double			t_diff;
 	t_game			*game;
 
 	game = (t_game *)param;
 	gettimeofday(&tv, NULL);
 	now = tv.tv_sec + tv.tv_usec / 1000000.0;
-	if (now - game->last_frame < 1.0 / FPS)
+	t_diff = now - game->last_frame;
+	if (t_diff < 1.0 / FPS)
 		return (0);
 	game->last_frame = now;
-	move_player(game);
+	move_player(game, t_diff);
 	ft_bzero(game->img.addr, game->img.len * HEIGHT);
 	raycast(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);

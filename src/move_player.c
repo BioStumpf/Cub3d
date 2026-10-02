@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 22:13:53 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/22 22:18:27 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 12:17:47 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ static void	translate(t_game *game, t_2d *dir, double step)
 		game->player.pos = new_pos;
 }
 
-int	move_player(t_game *game)
+int	move_player(t_game *game, double t_diff)
 {
 	if (game->keys.w)
-		translate(game, &game->player.dir, WALK);
+		translate(game, &game->player.dir, WALK * t_diff);
 	if (game->keys.s)
-		translate(game, &game->player.dir, -WALK);
+		translate(game, &game->player.dir, -WALK * t_diff);
 	if (game->keys.d)
-		translate(game, &game->player.cam, WALK);
+		translate(game, &game->player.cam, WALK * t_diff);
 	if (game->keys.a)
-		translate(game, &game->player.cam, -WALK);
+		translate(game, &game->player.cam, -WALK * t_diff);
 	if (game->keys.left || game->keys.right)
 	{
 		if (game->keys.right)
-			rotate(&game->player.dir, ROT);
+			rotate(&game->player.dir, ROT * t_diff);
 		else
-			rotate(&game->player.dir, -ROT);
+			rotate(&game->player.dir, -ROT * t_diff);
 		set_camera(game);
 	}
 	return (0);
