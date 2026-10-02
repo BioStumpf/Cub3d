@@ -6,11 +6,14 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/02 16:01:09 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/02 16:27:03 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "ft_printf.h"
+#include <string.h>
+#include <errno.h>
 
 static bool	check_filename_format(char	*file)
 {
@@ -33,8 +36,13 @@ static bool	check_filename_format(char	*file)
 
 bool	parse_data(char	*file, t_game *game)
 {
+	int file_fd;
 	(void)game;
+
 	if (!check_filename_format(file))
 		return (0);
+	file_fd = open(file, O_RDONLY);
+	if(file_fd == -1)
+		return (ft_printf(2, "%s: %s\n", file, strerror(errno)), 0);
 	return (1);
 }
