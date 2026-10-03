@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:37:47 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/08/21 14:22:22 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 22:43:31 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	find_player(t_game *game)
 		{
 			if (is_player(game->map.grid[i][j]))
 			{
-				game->player.pos.x = j;
-				game->player.pos.y = i;
+				game->player.pos.x = j + 0.5;
+				game->player.pos.y = i + 0.5;
 				return ;
 			}
 		}
