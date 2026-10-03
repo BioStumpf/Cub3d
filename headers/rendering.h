@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:46:22 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 12:10:30 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/03 11:47:26 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ void	setup_player(t_game *game);
 
 //moving the player around (rotate/translate);
 //used inside mlx loop hook right before drawing
+bool	is_wall(t_game *game, double x, double y);
 int		move_player(t_game *game, double t_diff);
 
 //game
 void	game_loop(t_game *game);
 void	init_hooks(t_game *game);
+int		focus_out(void *param);
 
 //dda and drawing
 void	raycast(t_game *game);

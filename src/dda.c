@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 10:56:16 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/03 11:50:38 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	dda(t_game *game, t_2d *ray, t_hit *hit)
 			dda.ray_len.y += dda.step_size.y;
 			hit->face = dda.face_y;
 		}
-		if (game->map.grid[(int)dda.ray_pos.y][(int)dda.ray_pos.x] == WALL)
+		if (is_wall(game, dda.ray_pos.x, dda.ray_pos.y))
 			break ;
 	}
 	return (calc_hit(&dda, hit));
