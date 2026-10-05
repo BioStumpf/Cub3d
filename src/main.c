@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/05 15:00:08 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:55:24 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&game, sizeof(game));
 	if (!parse_data(argv[1], &game))
 		return (1);
+	//print_map(&game);
 	/*printf("no: %s.\n", game.no);
 	printf("so: %s.\n", game.so);
 	printf("we: %s.\n", game.we);

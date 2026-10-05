@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/05 18:15:01 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:55:16 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,10 +221,34 @@ static bool get_map_size(char	*file, t_game	*game)
 	return (close(file_fd), 1);
 }
 
+static bool store_map(int fd, t_game	*game)
+{
+	size_t i;
+
+	game->map.grid = ft_calloc(game->map.height + 1, sizeof(char	*));
+	if(!game->map.grid)
+		return(ft_printf(2, "Error\nmalloc fail in store_map\n"), 0);
+	i = 0;
+	while ((int)i < game->map.height)
+	{
+		game->map.grid[i] = get_next_line(fd);
+		if (errno != 0)
+		{
+			ft_printf(2, "Error\ngnl fail in get_map_size\n");
+			return(close(fd), -1);
+		}
+		if (!game->map.grid[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static bool get_map(char	*file, int already_open_fd, t_game	*game)
 {
-	(void)already_open_fd;
 	if(!get_map_size(file, game))
+		return(0);
+	if(!store_map(already_open_fd, game))
 		return(0);
 	return(1);
 }
@@ -232,7 +256,6 @@ static bool get_map(char	*file, int already_open_fd, t_game	*game)
 bool	parse_data(char	*file, t_game *game)
 {
 	int file_fd;
-	(void)game;
 
 	if (!check_filename_format(file))
 		return (0);
