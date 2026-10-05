@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/05 15:16:17 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:15:01 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,10 @@ static bool	is_delim_valid(int fd)
 static int get_map_size_help(int file_fd, int	*cnt, t_game	*game)
 {
 	char	*line;
-	int		line_len;
+	size_t	line_len;
 
+	if (game->map.height == 2147483647)
+			return (ft_printf(2, "Error\nToo big map, be reasonable!\n"), 0);
 	line = get_next_line(file_fd);
 	if (errno != 0)
 	{
@@ -185,15 +187,15 @@ static int get_map_size_help(int file_fd, int	*cnt, t_game	*game)
 	line_len = ft_strlen(line);
 	if(line[line_len -1] == '\n')
 		line_len--;
+	if(line_len > 2147483647)
+		return (ft_printf(2, "Error\nToo big map, be reasonable!\n"), 0);
 	if (*cnt > 7)
 	{
-		if (line_len > game->map.width)
+		if ((int)line_len > game->map.width)
 			game->map.width = line_len;
 		game->map.height++;
 	}
-	(*cnt)++;
-	free(line);
-	return (1);
+	return ((*cnt)++, free(line), 1);
 }
 
 static bool get_map_size(char	*file, t_game	*game)
