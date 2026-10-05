@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/04 18:21:46 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/05 15:00:08 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int	main(int argc, char **argv)
 	printf("ea: %s.\n", game.ea);*/
 	/*dummy_map(&game); 
 	game_loop(&game);*/
-	cleanup(&game, NOPRINT, OK);
+	//cleanup(&game, NOPRINT, OK);
 }

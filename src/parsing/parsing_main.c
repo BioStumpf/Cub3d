@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/04 21:15:08 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/05 15:16:17 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,64 @@ static bool	is_delim_valid(int fd)
 	return (1);
 }
 
+static int get_map_size_help(int file_fd, int	*cnt, t_game	*game)
+{
+	char	*line;
+	int		line_len;
+
+	line = get_next_line(file_fd);
+	if (errno != 0)
+	{
+		ft_printf(2, "Error\ngnl fail in get_map_size\n");
+		return(close(file_fd), -1);
+	}
+	if (!line)
+		return (0);
+	line_len = ft_strlen(line);
+	if(line[line_len -1] == '\n')
+		line_len--;
+	if (*cnt > 7)
+	{
+		if (line_len > game->map.width)
+			game->map.width = line_len;
+		game->map.height++;
+	}
+	(*cnt)++;
+	free(line);
+	return (1);
+}
+
+static bool get_map_size(char	*file, t_game	*game)
+{
+	int		file_fd;
+	int		cnt;
+	int		help_ret;
+
+	file_fd = open(file, O_RDONLY);
+	if(file_fd == -1)
+		return (ft_printf(2, "%s: %s\n", file, strerror(errno)), 0);
+	cnt = 0;
+	while (1)
+	{
+		help_ret = get_map_size_help(file_fd, &cnt, game);
+		if(help_ret == -1)
+			return(0);
+		if(help_ret == 0)
+			break ;
+	}
+	if (game->map.height < 3 || game->map.width < 3)
+		return (close(file_fd), 0);
+	return (close(file_fd), 1);
+}
+
+static bool get_map(char	*file, int already_open_fd, t_game	*game)
+{
+	(void)already_open_fd;
+	if(!get_map_size(file, game))
+		return(0);
+	return(1);
+}
+
 bool	parse_data(char	*file, t_game *game)
 {
 	int file_fd;
@@ -184,6 +242,10 @@ bool	parse_data(char	*file, t_game *game)
 	if(!is_delim_valid(file_fd))
 		return(0);
 	if(!get_colours(file_fd, game))
+		return(0);
+	if(!is_delim_valid(file_fd))
+		return(0);
+	if(!get_map(file, file_fd, game))
 		return(0);
 	return (1);
 }
