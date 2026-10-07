@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/05 18:55:16 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/07 12:55:53 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,8 @@ static bool get_map_size(char	*file, t_game	*game)
 
 static bool store_map(int fd, t_game	*game)
 {
-	size_t i;
+	size_t	i;
+	char	*line;
 
 	game->map.grid = ft_calloc(game->map.height + 1, sizeof(char	*));
 	if(!game->map.grid)
@@ -231,14 +232,82 @@ static bool store_map(int fd, t_game	*game)
 	i = 0;
 	while ((int)i < game->map.height)
 	{
-		game->map.grid[i] = get_next_line(fd);
+		line = get_next_line(fd);
 		if (errno != 0)
 		{
-			ft_printf(2, "Error\ngnl fail in get_map_size\n");
-			return(close(fd), -1);
+			ft_printf(2, "Error\ngnl fail in store_map\n");
+			return(close(fd), 0);
 		}
-		if (!game->map.grid[i])
-			return (0);
+		if (!line)
+			break ;
+		game->map.grid[i] = ft_strtrim(line, "\n");
+		free(line);
+		if(!game->map.grid[i])
+			return(ft_printf(2, "Error\nmalloc fail in store_map\n"), 0);
+		i++;
+	}
+	return (1);
+}
+
+static bool is_player(char c)
+{
+	if(c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+static bool is_valid_surr_char(char	c)
+{
+	if(is_player(c) || c == '1' || c == '0')
+		return (1);
+	return (0);
+}
+
+static bool are_surrondings_valid(char	**map, size_t pos_y, size_t pos_x)
+{
+	char curr_c;
+	size_t valid_cnt;
+
+	curr_c = map[pos_y][pos_x];
+	if(curr_c == '1' || curr_c == ' ')
+		return (1);
+	if((curr_c == '0' || is_player(curr_c)) && (pos_y == 0 || pos_x == 0))
+		return(0);
+	valid_cnt = 0;
+	if (is_valid_surr_char(map[pos_y -1][pos_x]))
+		valid_cnt++;
+	if (map[pos_y +1] && is_valid_surr_char(map[pos_y +1][pos_x]))
+		valid_cnt++;
+	if (is_valid_surr_char(map[pos_y][pos_x -1]))
+		valid_cnt++;
+	if (map[pos_y][pos_x +1] && is_valid_surr_char(map[pos_y][pos_x +1]))
+		valid_cnt++;
+	if(valid_cnt == 4)
+		return (1);
+	return (0);
+}
+
+static bool map_is_valid(char	**map)
+{
+	size_t	player_cnt;
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+	player_cnt = 0;
+	while (map[i])
+	{
+		while (map[i][j])
+		{
+			if (is_player(map[i][j]))
+				player_cnt++;
+			if(player_cnt > 1)
+				return(0);
+			if (!are_surrondings_valid(map, i, j))
+				return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);
@@ -249,6 +318,8 @@ static bool get_map(char	*file, int already_open_fd, t_game	*game)
 	if(!get_map_size(file, game))
 		return(0);
 	if(!store_map(already_open_fd, game))
+		return(0);
+	if(!map_is_valid(game->map.grid))
 		return(0);
 	return(1);
 }

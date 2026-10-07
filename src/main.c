@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/05 18:55:24 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/07 12:56:44 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_bzero(&game, sizeof(game));
+	(void)argv;
 	if (!parse_data(argv[1], &game))
 		return (1);
 	//print_map(&game);
@@ -36,7 +37,7 @@ int	main(int argc, char **argv)
 	printf("so: %s.\n", game.so);
 	printf("we: %s.\n", game.we);
 	printf("ea: %s.\n", game.ea);*/
-	/*dummy_map(&game); 
-	game_loop(&game);*/
-	//cleanup(&game, NOPRINT, OK);
+	//dummy_map(&game); 
+	game_loop(&game);
+	cleanup(&game, NOPRINT, OK);
 }
