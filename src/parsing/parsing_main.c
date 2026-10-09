@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/07 12:55:53 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/10/09 16:11:29 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ static bool get_colours(int fd, t_game *game)
 	char	*line;
 
 	line = get_next_line(fd);
+	if (errno != 0)
+	{
+		ft_printf(2, "Error\ngnl fail in get_colours\n");
+		return (0);
+	}
+	if (!line)
+		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
 	if(!line)
 		return (0);
 	if(!get_colours_help(line, &game->floor, 'F'))
@@ -88,7 +95,7 @@ static bool get_colours(int fd, t_game *game)
 		return (0);
 	if(!get_colours_help(line, &game->ceiling, 'C'))
 		return (free(line), 0);
-	return(1);
+	return(free(line), 1);
 }
 
 static bool find_texture_path(char	*line, char	**cardinal_dir, int curr_pos)
@@ -119,7 +126,7 @@ static bool get_textures(int fd, t_game *game)
 	{
 		curr = get_next_line(fd);
 		if(!curr)
-			return(0);
+			return(free(game->no), free(game->so), free(game->we), free(game->ea), 0);
 		if(i == 0)
 			ret = find_texture_path(curr, &game->no, i);
 		if(i == 1)
@@ -128,10 +135,10 @@ static bool get_textures(int fd, t_game *game)
 			ret = find_texture_path(curr, &game->we, i);
 		if(i == 3)
 			ret = find_texture_path(curr, &game->ea, i);
-		if(!ret)
-			return(0);
-		i++;
 		free(curr);
+		if(!ret)
+			return(free(game->no), free(game->so), free(game->we), free(game->ea), 0);
+		i++;
 	}
 	return(1);
 }
@@ -165,8 +172,8 @@ static bool	is_delim_valid(int fd)
 		return(0);
 	line_len = ft_strlen(line);
 	if(!(line_len == 1 && line[0] == '\n'))
-		return(0);
-	return (1);
+		return(free(line), 0);
+	return (free(line), 1);
 }
 
 static int get_map_size_help(int file_fd, int	*cnt, t_game	*game)
@@ -180,7 +187,7 @@ static int get_map_size_help(int file_fd, int	*cnt, t_game	*game)
 	if (errno != 0)
 	{
 		ft_printf(2, "Error\ngnl fail in get_map_size\n");
-		return(close(file_fd), -1);
+		return (close(file_fd), -1);
 	}
 	if (!line)
 		return (0);
@@ -294,22 +301,24 @@ static bool map_is_valid(char	**map)
 	size_t j;
 
 	i = 0;
-	j = 0;
 	player_cnt = 0;
 	while (map[i])
 	{
+		j = 0;
 		while (map[i][j])
 		{
 			if (is_player(map[i][j]))
 				player_cnt++;
 			if(player_cnt > 1)
-				return(0);
+				return(ft_printf(2, "Error\nToo players in the map\n"), 0);
 			if (!are_surrondings_valid(map, i, j))
 				return (0);
 			j++;
 		}
 		i++;
 	}
+	if(player_cnt == 0)
+		return(ft_printf(2, "Error\nNo player placed in the map\n"), 0);
 	return (1);
 }
 

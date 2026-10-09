@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/07 12:56:44 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/10/09 16:00:41 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	printf("we: %s.\n", game.we);
 	printf("ea: %s.\n", game.ea);*/
 	//dummy_map(&game); 
-	game_loop(&game);
+	//game_loop(&game);
+	print_map(&game);
 	cleanup(&game, NOPRINT, OK);
 }

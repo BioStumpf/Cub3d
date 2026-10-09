@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:12:36 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 14:55:43 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/09 15:58:21 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ void	cleanup(t_game *game, bool print_err, int exit_status)
 	free(game->map.grid);
 	if (print_err)
 		perror("Error\n");
+	free(game->no);
+	free(game->so);
+	free(game->we);
+	free(game->ea);
 	exit (exit_status);
 }
