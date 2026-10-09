@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/09 16:00:41 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/09 18:02:53 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (!parse_data(argv[1], &game))
 		return (1);
-	//print_map(&game);
-	/*printf("no: %s.\n", game.no);
-	printf("so: %s.\n", game.so);
-	printf("we: %s.\n", game.we);
-	printf("ea: %s.\n", game.ea);*/
 	//dummy_map(&game); 
-	//game_loop(&game);
+	game_loop(&game);
 	print_map(&game);
 	cleanup(&game, NOPRINT, OK);
 }
