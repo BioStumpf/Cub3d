@@ -15,7 +15,7 @@ HEADER_DIR := headers/
 
 PARSING = parsing/parsing_main.c parsing/parsing_of_textures.c parsing/parsing_of_colours.c \
            parsing/parsing_of_map_main.c parsing/parsing_of_map_size.c  parsing/parsing_map_validity.c
-SRCS = main.c dummy_map_generator.c cleanup.c game_loop.c player_setup.c hooks.c draw_map.c dda.c move_player.c $(PARSING)
+SRCS = main.c dummy_map_generator.c cleanup.c game_loop.c player_setup.c hooks.c draw_map.c dda.c move_player.c hooks2.c $(PARSING)
 SRCS := $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS := $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 DEPS := $(patsubst $(SRCS_DIR)%.c, $(DEP_DIR)%.d, $(SRCS))

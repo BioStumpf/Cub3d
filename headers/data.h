@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 16:18:30 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/12 17:16:51 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WALK 2.7 
 # define ROT 2.4
 # define FPS 200.0
+# define PLAYER_BODY 0.1
 
 # include <mlx.h>
 # include <X11/keysym.h>
