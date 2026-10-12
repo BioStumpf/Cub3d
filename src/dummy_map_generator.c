@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:18:54 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 14:54:05 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/02 22:21:51 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	dummy_map(t_game *game)
 {
-	game->floor = 220 << 16 | 100 << 8 | 0;
+	game->ceiling = 220 << 16 | 100 << 8 | 0;
 	game->floor = 225 << 16 | 30 << 8 | 0;
 
 	game->map.width = 33;

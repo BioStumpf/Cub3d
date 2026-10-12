@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:26:13 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 12:09:42 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/03 10:54:43 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	draw_img(void *param)
 	if (t_diff < 1.0 / FPS)
 		return (0);
 	game->last_frame = now;
+	if (t_diff > 0.1)
+		t_diff = 0.1;
 	move_player(game, t_diff);
 	ft_bzero(game->img.addr, game->img.len * HEIGHT);
 	raycast(game);
@@ -71,6 +73,7 @@ void	init_hooks(t_game *game)
 {
 	mlx_hook(game->win, 2, 1L << 0, &key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, &key_release, game);
+	mlx_hook(game->win, 10, 1L << 21, &focus_out, game);
 	mlx_hook(game->win, 17, 0, mlx_loop_end, game->mlx);
 	mlx_loop_hook(game->mlx, draw_img, game);
 }

@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 12:19:34 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/03 11:37:52 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WALK 2.7 
 # define ROT 2.4
 # define FPS 200.0
+# define PLAYER_BODY 0.1
 
 # include <mlx.h>
 # include <X11/keysym.h>
