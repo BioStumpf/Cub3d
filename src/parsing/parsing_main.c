@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 17:00:02 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/13 13:47:34 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ bool	parse_data(char	*file, t_game *game)
 	if (file_fd == -1)
 		return (ft_printf(2, "%s: %s\n", file, strerror(errno)), 0);
 	if (!get_textures(file_fd, game))
-		return (0);
+		return (close(file_fd), 0);
 	if (!is_delim_valid(file_fd))
-		return (0);
+		return (close(file_fd), 0);
 	if (!get_colours(file_fd, game))
-		return (0);
+		return (close(file_fd), 0);
 	if (!is_delim_valid(file_fd))
-		return (0);
+		return (close(file_fd), 0);
 	if (!get_map(file, file_fd, game))
-		return (0);
-	return (1);
+		return (close(file_fd), 0);
+	return (close(file_fd), 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_of_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:14:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 17:41:23 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/13 14:02:27 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	get_textures(int fd, t_game *game)
 	{
 		curr = get_next_line(fd);
 		if (!curr)
-			return (free(game->no), free(game->so), free(game->we), free(game->ea), 0);
+			return (0);
 		if (i == 0)
 			ret = find_texture_path(curr, &game->no, i);
 		if (i == 1)
@@ -51,7 +51,7 @@ bool	get_textures(int fd, t_game *game)
 			ret = find_texture_path(curr, &game->ea, i);
 		free(curr);
 		if (!ret)
-			return (free(game->no), free(game->so), free(game->we), free(game->ea), 0);
+			return (0);
 		i++;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_validity.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 16:51:42 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/10/13 13:23:15 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static bool	are_surrondings_valid(char	**map, size_t pos_y, size_t pos_x)
 		valid_cnt++;
 	if (valid_cnt == 4)
 		return (1);
+	ft_printf(2, "Error\nMap invalid, check README for the specs\n");
 	return (0);
 }
 
