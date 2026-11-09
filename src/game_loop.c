@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:21:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 11:49:14 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/09 15:43:12 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void	init_tex(t_game *game, t_tex *tex, char *path)
 
 static bool	init_textures(t_game *game)
 {
-	if (!game->no)
-		return (false);
 	init_tex(game, &game->no_tex, game->no);
 	init_tex(game, &game->so_tex, game->so);
 	init_tex(game, &game->we_tex, game->we);
