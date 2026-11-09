@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/03 11:50:38 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/09 14:20:04 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ static void	init_step_dir(t_2d *ray, t_dda *dda)
 	if (ray->x < 0)
 	{
 		dda->step_dir.x = -1;
-		dda->face_x = EAST;
+		dda->face_x = WEST;
 	}
 	else
 	{
 		dda->step_dir.x = 1;
-		dda->face_x = WEST;
+		dda->face_x = EAST;
 	}
 	if (ray->y < 0)
 	{
 		dda->step_dir.y = -1;
-		dda->face_y = SOUTH;
+		dda->face_y = NORTH;
 	}
 	else
 	{
 		dda->step_dir.y = 1;
-		dda->face_y = NORTH;
+		dda->face_y = SOUTH;
 	}
 }
 

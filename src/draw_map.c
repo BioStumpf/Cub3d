@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:58:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/03 11:23:44 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/09 14:19:47 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static void	pixel_to_img(t_imge *img, int x, int y, uint32_t color)
 //if we face an east or western wall, that means 
 //this horizontal direction is actually the y coordinates
 //in our map. if e.g. we hit the wall at (2, 1.2)
-//on an western facing wall, we are at 20% of the texture in x direction
+//on the eastern wall, we are at 20% of the texture in x direction
 //which gives us the texture column we need to draw
-//if our ray hit a wall facing NORTH or EAST, we need to reverse the
+//if our ray hit the SOUTHERN or WESTERN wall, we need to reverse the
 //x coordinate.
-//e.g. if we look at a wall facing NORTH, we ourselfs face south,
+//e.g. if we look at the NOTHERN wall, we ourselfs face NORTH,
 //meaning the maps x axis is inverted (the texture needs to be drawn
 //left to right, while our x axis goes from right to left)
 //so in these cases we take the distance to the ceiled actual coordinate
@@ -53,14 +53,14 @@ static void	set_texture(t_game *game, t_2d *ray, t_hit *hit,
 	else
 		cell_x = game->player.pos.x + ray->x * hit->dist;
 	if (hit->face == NORTH)
-		wall->texture = &game->so_tex;
-	else if (hit->face == SOUTH)
 		wall->texture = &game->no_tex;
+	else if (hit->face == SOUTH)
+		wall->texture = &game->so_tex;
 	else if (hit->face == EAST)
-		wall->texture = &game->we_tex;
-	else if (hit->face == WEST)
 		wall->texture = &game->ea_tex;
-	if (hit->face == NORTH || hit->face == EAST)
+	else if (hit->face == WEST)
+		wall->texture = &game->we_tex;
+	if (hit->face == SOUTH || hit->face == WEST)
 		wall->x = (ceil(cell_x) - cell_x) * wall->texture->width;
 	else
 		wall->x = (cell_x - floor(cell_x)) * wall->texture->width;
