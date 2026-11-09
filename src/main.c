@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/13 14:12:54 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/09 14:44:28 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	if (!parse_data(argv[1], &game))
 		return (cleanup(&game, NOPRINT, ERR), 1);
 	//dummy_map(&game); 
-	//game_loop(&game);
+	game_loop(&game);
 	//print_map(&game);
 	cleanup(&game, NOPRINT, OK);
 }

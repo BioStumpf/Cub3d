@@ -1,0 +1,7 @@
+1. Noprint when map is invalid (e.g. wall missing)
+2. Muliptle lines cause error, also it doesnt print newline at end of error msg
+3. Segfaults
+4. invalid chars accepted (like an s or a 9, map should only be composed of the 6 chars)
+5. no error msg for just1.cub map
+6. no error msg for noplayer.cub map
+7. no error msg for color_wrong
