@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/10 23:33:35 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/10 23:39:04 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ bool	parse_data(char	*file, t_game *game)
 		return (close(file_fd), 0);
 	if (elem_cnt != 6)
 	{
-		ft_printf(2, "Error\nSome Data Missing in at top of input file\n");
+		ft_printf(2, "Error\nData input doesnt correspond to specs\n");
 		return (0);
 	}
 	if (!get_map(file, map_start, game))
