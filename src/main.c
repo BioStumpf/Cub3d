@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 09:48:19 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/13 14:12:54 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/10 23:30:26 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include "libft.h"
 #include "rendering.h"
 #include "parsing.h"
-
-// print_map(&game); -> after dummy_map or when nils
-// generated the map this is how it can be printed
 
 int	main(int argc, char **argv)
 {
@@ -32,8 +29,6 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (!parse_data(argv[1], &game))
 		return (cleanup(&game, NOPRINT, ERR), 1);
-	//dummy_map(&game); 
-	//game_loop(&game);
-	//print_map(&game);
+	game_loop(&game);
 	cleanup(&game, NOPRINT, OK);
 }

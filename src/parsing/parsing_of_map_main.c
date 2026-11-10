@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_of_map_main.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:24:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 16:48:52 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/11/10 23:19:19 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,20 @@ static bool	store_map(int fd, t_game	*game)
 	return (1);
 }
 
-bool	get_map(char	*file, int already_open_fd, t_game	*game)
+bool	get_map(char	*file, size_t map_start, t_game	*game)
 {
-	if (!get_map_size(file, game))
+	int	file_fd;
+
+	if (!get_map_size(file, game, map_start))
 		return (0);
-	if (!store_map(already_open_fd, game))
-		return (0);
+	file_fd = open(file, O_RDONLY);
+	if (file_fd == -1)
+		return (ft_printf(2, "%s: %s\n", file, strerror(errno)), 0);
+	if (!skip_all_pre_map(file_fd, map_start))
+		return (close(file_fd), 0);
+	if (!store_map(file_fd, game))
+		return (close(file_fd), 0);
 	if (!map_is_valid(game->map.grid))
-		return (0);
-	return (1);
+		return (close(file_fd), 0);
+	return (close(file_fd), 1);
 }

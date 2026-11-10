@@ -6,53 +6,56 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:14:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/13 14:02:27 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/10 23:23:14 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static bool	find_texture_path(char	*line, char	**cardinal_dir, int curr_pos)
+static bool	check_if_data_already_stored(t_game	*game, char	*line)
 {
-	if (curr_pos == 0 && ft_strncmp(line, "NO ", 3) != 0)
-		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
-	if (curr_pos == 1 && ft_strncmp(line, "SO ", 3) != 0)
-		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
-	if (curr_pos == 2 && ft_strncmp(line, "WE ", 3) != 0)
-		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
-	if (curr_pos == 3 && ft_strncmp(line, "EA ", 3) != 0)
-		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
-	line += 3;
-	*cardinal_dir = ft_strtrim(line, "\n");
-	if (!*cardinal_dir)
-		return (ft_printf(2, "Error\ntrim failed in find_texture_path"), NULL);
+	if (ft_strncmp(line, "NO", 2) == 0 && game->no)
+		return (ft_printf(2, "Error\n.cub input invalid, NO already stored"),
+			0);
+	if (ft_strncmp(line, "SO", 2) == 0 && game->so)
+		return (ft_printf(2, "Error\n.cub input invalid, SO already stored"),
+			0);
+	if (ft_strncmp(line, "WE", 2) == 0 && game->we)
+		return (ft_printf(2, "Error\n.cub input invalid, WE already stored"),
+			0);
+	if (ft_strncmp(line, "EA", 2) == 0 && game->ea)
+		return (ft_printf(2, "Error\n.cub input invalid, EA already stored"),
+			0);
+	if (ft_strncmp(line, "F", 2) == 0 && game->floor)
+		return (ft_printf(2, "Error\n.cub input invalid, EA already stored"),
+			0);
+	if (ft_strncmp(line, "C", 2) == 0 && game->ceiling)
+		return (ft_printf(2, "Error\n.cub input invalid, EA already stored"),
+			0);
 	return (1);
 }
 
-bool	get_textures(int fd, t_game *game)
+bool	get_textures(char	*line, t_game	*game)
 {
-	char	*curr;
-	bool	ret;
-	int		i;
+	char	*line_before;
+	char	*trimmed;
 
-	i = 0;
-	while (i < 4)
-	{
-		curr = get_next_line(fd);
-		if (!curr)
-			return (0);
-		if (i == 0)
-			ret = find_texture_path(curr, &game->no, i);
-		if (i == 1)
-			ret = find_texture_path(curr, &game->so, i);
-		if (i == 2)
-			ret = find_texture_path(curr, &game->we, i);
-		if (i == 3)
-			ret = find_texture_path(curr, &game->ea, i);
-		free(curr);
-		if (!ret)
-			return (0);
-		i++;
-	}
+	line_before = line;
+	if (!check_if_data_already_stored(game, line))
+		return (0);
+	line += 2;
+	while (ft_iswhitespace(*line))
+		line += 1;
+	trimmed = ft_strtrim(line, "\n");
+	if (!trimmed)
+		return (ft_printf(2, "Error\ntrim failed in find_texture_path"), 0);
+	if (ft_strncmp(line_before, "NO", 2) == 0)
+		game->no = trimmed;
+	if (ft_strncmp(line_before, "SO", 2) == 0)
+		game->so = trimmed;
+	if (ft_strncmp(line_before, "WE", 2) == 0)
+		game->we = trimmed;
+	if (ft_strncmp(line_before, "EA", 2) == 0)
+		game->ea = trimmed;
 	return (1);
 }

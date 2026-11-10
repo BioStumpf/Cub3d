@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_of_colours.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:20:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 16:54:30 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/11/10 23:23:59 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_num(char	**line, bool last_num)
 		return (-42);
 	num_s = ft_calloc(i + 1, sizeof(char));
 	if (!num_s)
-		return (ft_printf(2, "Error\nCalloc failed in get_num"), 0);
+		return (ft_printf(2, "Error\nCalloc failed in get_num"), -42);
 	ft_strlcpy(num_s, line[0], i +1);
 	num = ft_atoi(num_s);
 	if (!last_num)
@@ -72,27 +72,14 @@ static bool	get_colours_help(char	*line, int	*to_store_in, char surface)
 	return (1);
 }
 
-bool	get_colours(int fd, t_game *game)
+bool	get_colours(char	*line, t_game *game)
 {
-	char	*line;
+	bool	ret;
 
-	line = get_next_line(fd);
-	if (errno != 0)
-	{
-		ft_printf(2, "Error\ngnl fail in get_colours\n");
-		return (0);
-	}
-	if (!line)
-		return (ft_printf(2, "Error\n.cub input invalid, check README"), 0);
-	if (!line)
-		return (0);
-	if (!get_colours_help(line, &game->floor, 'F'))
-		return (free(line), 0);
-	free(line);
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	if (!get_colours_help(line, &game->ceiling, 'C'))
-		return (free(line), 0);
-	return (free(line), 1);
+	ret = 0;
+	if (ft_strncmp(line, "F", 1) == 0)
+		ret = get_colours_help(line, &game->floor, 'F');
+	if (ft_strncmp(line, "C", 1) == 0)
+		ret = get_colours_help(line, &game->ceiling, 'C');
+	return (ret);
 }
