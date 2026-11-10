@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:12:36 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/09/30 14:55:43 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/13 14:03:06 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,20 @@ static void	clean_mlx(t_game *game)
 	}
 }
 
-//add this later, for now the paths are hardcoded
-	// free(game->no);
-	// free(game->so);
-	// free(game->we);
-	// free(game->ea);
 void	cleanup(t_game *game, bool print_err, int exit_status)
 {
 	int	i;
 
 	clean_mlx(game);
 	i = 0;
-	while (i < game->map.height)
+	while (game->map.grid && i < game->map.height)
 		free(game->map.grid[i++]);
 	free(game->map.grid);
 	if (print_err)
 		perror("Error\n");
+	free(game->no);
+	free(game->so);
+	free(game->we);
+	free(game->ea);
 	exit (exit_status);
 }

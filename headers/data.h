@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 16:14:09 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/03 11:37:52 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/10/12 17:16:51 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 
 # include <mlx.h>
 # include <X11/keysym.h>
+# include <stdio.h>
 # include <stdbool.h>
+# include "libft.h"
 
 typedef struct s_map
 {
