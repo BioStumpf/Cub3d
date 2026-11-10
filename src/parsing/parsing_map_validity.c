@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/13 13:23:15 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/10 23:41:46 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	map_is_valid(char	**map)
 			if (is_player(map[i][j]))
 				player_cnt++;
 			if (player_cnt > 1)
-				return (ft_printf(2, "Error\nToo players in the map\n"), 0);
+				return (ft_printf(2, "Error\nToo many players in the map\n"), 0);
 			if (!are_surrondings_valid(map, i, j))
 				return (0);
 			j++;
