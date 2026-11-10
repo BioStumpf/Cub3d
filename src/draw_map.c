@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:58:52 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/11/09 14:19:47 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/10 13:59:08 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@ static void	pixel_to_img(t_imge *img, int x, int y, uint32_t color)
 //in our map. if e.g. we hit the wall at (2, 1.2)
 //on the eastern wall, we are at 20% of the texture in x direction
 //which gives us the texture column we need to draw
-//if our ray hit the SOUTHERN or WESTERN wall, we need to reverse the
-//x coordinate.
-//e.g. if we look at the NOTHERN wall, we ourselfs face NORTH,
-//meaning the maps x axis is inverted (the texture needs to be drawn
-//left to right, while our x axis goes from right to left)
-//so in these cases we take the distance to the ceiled actual coordinate
+//if our ray hit the walls facing NORTH (when we ourselfs face SOUTH)
+//or the wall facing EAST (when we outselfs face WEST),
+//we need to reverse the x coordinate.
 //e.g.: 1.2: ceil(1.2) - 1.2 = 0.8
 //while in the other cases we would take 0.2 as the fraction
 //note: hit->face is where the wall itself faces not the player
@@ -60,7 +57,7 @@ static void	set_texture(t_game *game, t_2d *ray, t_hit *hit,
 		wall->texture = &game->ea_tex;
 	else if (hit->face == WEST)
 		wall->texture = &game->we_tex;
-	if (hit->face == SOUTH || hit->face == WEST)
+	if (hit->face == NORTH || hit->face == EAST)
 		wall->x = (ceil(cell_x) - cell_x) * wall->texture->width;
 	else
 		wall->x = (cell_x - floor(cell_x)) * wall->texture->width;

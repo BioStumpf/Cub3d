@@ -6,7 +6,7 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 17:05:04 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/11/09 14:20:04 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/10 13:59:49 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 #include <math.h>
 
 //the face_x and face_y indicate where the ray will hit the wall
-//if me move -x, we move west, which means we will hit the wall east
-//if me move -y (up), we move north, wall hit south
+//if ray moves -x, we move west, which means we will hit the wall facing east
+//if ray moves -y (up), we move north, wall hit facing south
 //this is important to know for the textures later
 static void	init_step_dir(t_2d *ray, t_dda *dda)
 {
 	if (ray->x < 0)
 	{
 		dda->step_dir.x = -1;
-		dda->face_x = WEST;
+		dda->face_x = EAST;
 	}
 	else
 	{
 		dda->step_dir.x = 1;
-		dda->face_x = EAST;
+		dda->face_x = WEST;
 	}
 	if (ray->y < 0)
 	{
 		dda->step_dir.y = -1;
-		dda->face_y = NORTH;
+		dda->face_y = SOUTH;
 	}
 	else
 	{
 		dda->step_dir.y = 1;
-		dda->face_y = SOUTH;
+		dda->face_y = NORTH;
 	}
 }
 
