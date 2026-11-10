@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:24:29 by nildruon          #+#    #+#             */
-/*   Updated: 2026/10/09 16:50:07 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/11/10 14:46:34 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ bool get_map(char	*file, int already_open_fd, t_game	*game);
 bool get_colours(int fd, t_game *game);
 bool get_textures(int fd, t_game *game);
 bool parse_data(char	*file, t_game *game);
+int get_next_line_wrapper(int file_fd, char **save_into, char *func_call);
 
 #endif
