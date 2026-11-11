@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:24:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 02:44:45 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:45:42 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static char	*add_right_padding(char	*line, t_game	*game)
 	char	*ret;
 
 	trimmed = ft_strtrim(line, "\n");
-	if(!trimmed)
-		return(NULL);
+	if (!trimmed)
+		return (NULL);
 	ret = ft_calloc(game->map.width + 1, sizeof(char));
-	if(!ret)
-		return(free(trimmed), NULL);
+	if (!ret)
+		return (free(trimmed), NULL);
 	ft_memset(ret, ' ', game->map.width);
 	ft_memcpy(ret, trimmed, ft_strlen(trimmed));
 	free(trimmed);
-	return(ret);
+	return (ret);
 }
 
 static bool	store_map(int fd, t_game	*game)
