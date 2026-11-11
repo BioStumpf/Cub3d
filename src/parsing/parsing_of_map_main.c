@@ -6,13 +6,29 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:24:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/10 23:19:19 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:43:05 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include <errno.h>
 #include <string.h>
+
+static char	*add_right_padding(char	*line, t_game	*game)
+{
+	char	*trimmed;
+	char	*ret;
+
+	trimmed = ft_strtrim(line, "\n");
+	if(!trimmed)
+		return(NULL);
+	ret = ft_calloc(game->map.width + 1, sizeof(char));
+	if(!ret)
+		return(free(trimmed), NULL);
+	ft_memset(ret, ' ', game->map.width);
+	ft_memcpy(ret, trimmed, ft_strlen(trimmed));
+	return(ret);
+}
 
 static bool	store_map(int fd, t_game	*game)
 {
@@ -33,7 +49,7 @@ static bool	store_map(int fd, t_game	*game)
 		}
 		if (!line)
 			break ;
-		game->map.grid[i] = ft_strtrim(line, "\n");
+		game->map.grid[i] = add_right_padding(line, game);
 		free(line);
 		if (!game->map.grid[i])
 			return (ft_printf(2, "Error\nmalloc fail in store_map\n"), 0);
