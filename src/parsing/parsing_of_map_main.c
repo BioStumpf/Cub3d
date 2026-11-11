@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:24:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 02:45:42 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:49:38 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	store_map(int fd, t_game	*game)
 		if (errno != 0)
 		{
 			ft_printf(2, "Error\ngnl fail in store_map\n");
-			return (close(fd), 0);
+			return (0);
 		}
 		if (!line)
 			break ;

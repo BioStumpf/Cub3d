@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:32:51 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 02:27:33 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:49:30 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_map_size_help(int file_fd, t_game	*game)
 	if (errno != 0)
 	{
 		ft_printf(2, "Error\ngnl fail in get_map_size\n");
-		return (close(file_fd), -1);
+		return (-1);
 	}
 	if (!line)
 		return (0);
@@ -50,7 +50,7 @@ bool	get_map_size(char	*file, t_game	*game, size_t	map_start)
 	if (file_fd == -1)
 		return (ft_printf(2, "%s: %s\n", file, strerror(errno)), 0);
 	if (!skip_all_pre_map(file_fd, map_start))
-		return (0);
+		return (close(file_fd), 0);
 	while (1)
 	{
 		help_ret = get_map_size_help(file_fd, game);
