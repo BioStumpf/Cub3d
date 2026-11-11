@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:32:51 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:40:43 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:27:33 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	get_map_size_help(int file_fd, t_game	*game)
 	if (line[line_len -1] == '\n')
 		line_len--;
 	if (line_len > 2147483647)
-		return (ft_printf(2, "Error\nToo big map, be reasonable!\n"), 0);
+		return (ft_printf(2, "Error\nToo big map, be reasonable!\n"), -1);
 	if ((int)line_len > game->map.width)
 		game->map.width = line_len;
 	game->map.height++;
@@ -55,7 +55,7 @@ bool	get_map_size(char	*file, t_game	*game, size_t	map_start)
 	{
 		help_ret = get_map_size_help(file_fd, game);
 		if (help_ret == -1)
-			return (0);
+			return (close(file_fd), 0);
 		if (help_ret == 0)
 			break ;
 	}
