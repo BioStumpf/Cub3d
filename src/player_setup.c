@@ -6,12 +6,11 @@
 /*   By: dstumpf <dstumpf@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 11:37:47 by dstumpf           #+#    #+#             */
-/*   Updated: 2026/10/02 22:43:31 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/11 11:40:58 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
-// #include "rendering.h"
 
 static bool	is_player(char c)
 {
