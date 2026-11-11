@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:24:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 02:43:05 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 02:44:45 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	*add_right_padding(char	*line, t_game	*game)
 		return(free(trimmed), NULL);
 	ft_memset(ret, ' ', game->map.width);
 	ft_memcpy(ret, trimmed, ft_strlen(trimmed));
+	free(trimmed);
 	return(ret);
 }
 
