@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/10 23:41:46 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:19:58 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,22 @@ static bool	is_player(char c)
 	return (0);
 }
 
-static bool	is_valid_surr_char(char c)
+static bool	is_valid_surr_char(char current, size_t y, size_t x, char	**map)
 {
+	char	c;
+
+	if(!map[y])
+	{
+		if(is_player(current) || current == '0')
+			return(0);
+		else
+			return(1);
+	}
+	c = map[y][x];
+	if(current == '1' && (ft_iswhitespace(c) || !c))
+		return(1);
+	if (current == '0' && (c != '1' && !is_player(c) && c != '0'))
+		return (0);
 	if (is_player(c) || c == '1' || c == '0')
 		return (1);
 	return (0);
@@ -32,23 +46,24 @@ static bool	are_surrondings_valid(char	**map, size_t pos_y, size_t pos_x)
 	size_t	valid_cnt;
 
 	curr_c = map[pos_y][pos_x];
-	if (curr_c == '1' || curr_c == ' ')
+	if (curr_c == ' ')
 		return (1);
 	if ((curr_c == '0' || is_player(curr_c)) && (pos_y == 0 || pos_x == 0))
 		return (0);
 	valid_cnt = 0;
-	if (is_valid_surr_char(map[pos_y -1][pos_x]))
+	if ((pos_y > 0 && is_valid_surr_char(curr_c, pos_y -1, pos_x, map))
+		|| (pos_y == 0 && curr_c == '1'))
 		valid_cnt++;
-	if (map[pos_y +1] && is_valid_surr_char(map[pos_y +1][pos_x]))
+	if (is_valid_surr_char(curr_c, pos_y +1, pos_x, map))
 		valid_cnt++;
-	if (is_valid_surr_char(map[pos_y][pos_x -1]))
+	if ((pos_x > 0 && is_valid_surr_char(curr_c, pos_y, pos_x -1, map))
+		|| (pos_x == 0 && curr_c == '1'))
 		valid_cnt++;
-	if (map[pos_y][pos_x +1] && is_valid_surr_char(map[pos_y][pos_x +1]))
+	if (is_valid_surr_char(curr_c, pos_y, pos_x +1, map))
 		valid_cnt++;
 	if (valid_cnt == 4)
 		return (1);
-	ft_printf(2, "Error\nMap invalid, check README for the specs\n");
-	return (0);
+	return (ft_printf(2, "Error\nMap invalid, check specss\n"), 0);
 }
 
 bool	map_is_valid(char	**map)

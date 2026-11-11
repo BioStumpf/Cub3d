@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/10 23:39:04 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:33:37 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	if_map_started(char	*line)
 		return (0);
 	while (line[i])
 	{
-		if (line[i] != '1' && line[i] != ' ' && line[i] != '\n')
+		if (line[i] != '1' && !ft_iswhitespace(line[i]) && line[i] != '\n')
 			return (0);
 		i++;
 	}
