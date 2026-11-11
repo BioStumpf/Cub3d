@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:32:51 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/10 23:57:29 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:40:43 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	get_map_size(char	*file, t_game	*game, size_t	map_start)
 	}
 	if (game->map.height < 3 || game->map.width < 3)
 	{
-		ft_printf(2, "Error\nToo small map, check Readme!\n"); 
+		ft_printf(2, "Error\nToo small map, check Readme!\n");
 		return (close(file_fd), 0);
 	}
 	return (close(file_fd), 1);

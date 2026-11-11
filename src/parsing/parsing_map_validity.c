@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:36:21 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:40:44 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static bool	is_valid_surr_char(char current, size_t y, size_t x, char	**map)
 {
 	char	c;
 
-	if(!map[y])
+	if (!map[y])
 	{
-		if(is_player(current) || current == '0')
-			return(0);
+		if (is_player(current) || current == '0')
+			return (0);
 		else
-			return(1);
+			return (1);
 	}
 	c = map[y][x];
-	if(current == '1' && (ft_iswhitespace(c) || !c))
-		return(1);
+	if (current == '1' && (ft_iswhitespace(c) || !c))
+		return (1);
 	if (current == '0' && (c != '1' && !is_player(c) && c != '0'))
 		return (0);
 	if (is_player(c) || c == '1' || c == '0')
@@ -82,7 +82,8 @@ bool	map_is_valid(char	**map)
 			if (is_player(map[i][j]))
 				player_cnt++;
 			if (player_cnt > 1)
-				return (ft_printf(2, "Error\nToo many players in the map\n"), 0);
+				return (ft_printf(2, "Error\nToo many players in the map\n"),
+					0);
 			if (!are_surrondings_valid(map, i, j))
 				return (0);
 			j++;
