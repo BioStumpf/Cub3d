@@ -6,13 +6,12 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 11:28:37 by dstumpf          ###   ########.fr       */
+/*   Updated: 2026/11/11 11:40:21 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "ft_printf.h"
-#include "get_next_line.h"
 #include <string.h>
 #include <errno.h>
 
