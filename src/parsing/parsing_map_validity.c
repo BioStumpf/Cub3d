@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:19:58 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:36:21 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static bool	are_surrondings_valid(char	**map, size_t pos_y, size_t pos_x)
 		valid_cnt++;
 	if (valid_cnt == 4)
 		return (1);
-	return (ft_printf(2, "Error\nMap invalid, check specss\n"), 0);
+	return (ft_printf(2, "Error\nMap invalid, check specs\n"), 0);
 }
 
 bool	map_is_valid(char	**map)

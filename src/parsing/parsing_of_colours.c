@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:20:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 00:07:13 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:37:17 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_num(char	**line, bool last_num)
 	}
 	num_s = ft_calloc(i + 1, sizeof(char));
 	if (!num_s)
-		return (ft_printf(2, "Error\nCalloc failed in get_num"), -42);
+		return (ft_printf(2, "Error\nCalloc failed in get_num\n"), -42);
 	ft_strlcpy(num_s, line[0], i +1);
 	num = ft_atoi(num_s);
 	if (!last_num)
