@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 14:23:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 02:17:16 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 11:28:37 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,22 @@ static bool	if_map_started(char	*line)
 static bool	check_which_elem_and_store(char	*line, t_game	*game,
 		size_t *elem_cnt)
 {
+	char	*trimmed;
+
 	if (!line)
 		return (0);
-	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
-		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
-		return ((*elem_cnt)++, get_textures(line, game));
-	else if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
-		return ((*elem_cnt)++, get_colours(line, game));
+	trimmed = ft_strtrim(line, " \f\n\t\r\v");
+	if (!trimmed)
+		return (ft_printf(2, "Error\ntrim failed\n"), 0);
+	if (!ft_strncmp(trimmed, "NO", 2) || !ft_strncmp(trimmed, "SO", 2)
+		|| !ft_strncmp(trimmed, "WE", 2) || !ft_strncmp(trimmed, "EA", 2))
+		return ((*elem_cnt)++, get_textures(trimmed, game));
+	else if (!ft_strncmp(trimmed, "F", 1) || !ft_strncmp(trimmed, "C", 1))
+		return ((*elem_cnt)++, get_colours(trimmed, game));
 	else if (is_delim_valid(line))
-		return (1);
+		return (free(trimmed), 1);
 	else
-		return (0);
+		return (free(trimmed), 0);
 }
 
 static bool	parse_data_help(int file_fd, t_game	*game,

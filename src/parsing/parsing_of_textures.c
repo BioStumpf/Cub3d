@@ -6,10 +6,11 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:14:01 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:38:05 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 10:57:10 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parsing.h"
 
 static bool	check_if_data_already_stored(t_game	*game, char	*line)
@@ -38,24 +39,27 @@ static bool	check_if_data_already_stored(t_game	*game, char	*line)
 bool	get_textures(char	*line, t_game	*game)
 {
 	char	*line_before;
-	char	*trimmed;
 
 	line_before = line;
 	if (!check_if_data_already_stored(game, line))
-		return (0);
+		return (free(line_before), 0);
 	line += 2;
 	while (ft_iswhitespace(*line))
 		line += 1;
-	trimmed = ft_strtrim(line, "\n");
-	if (!trimmed)
-		return (ft_printf(2, "Error\ntrim failed in find_texture_path\n"), 0);
+	line = ft_strdup(line);
+	if (!line)
+	{
+		free(line_before);
+		return (ft_printf(2, "Error\nstrdup\n"), 0);
+	}
 	if (ft_strncmp(line_before, "NO", 2) == 0)
-		game->no = trimmed;
-	if (ft_strncmp(line_before, "SO", 2) == 0)
-		game->so = trimmed;
-	if (ft_strncmp(line_before, "WE", 2) == 0)
-		game->we = trimmed;
-	if (ft_strncmp(line_before, "EA", 2) == 0)
-		game->ea = trimmed;
+		game->no = line;
+	else if (ft_strncmp(line_before, "SO", 2) == 0)
+		game->so = line;
+	else if (ft_strncmp(line_before, "WE", 2) == 0)
+		game->we = line;
+	else if (ft_strncmp(line_before, "EA", 2) == 0)
+		game->ea = line;
+	free(line_before);
 	return (1);
 }

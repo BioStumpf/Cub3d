@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_of_colours.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dstumpf <dstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:20:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:37:17 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 11:26:17 by dstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parsing.h"
-#include "get_next_line.h"
 #include "ft_printf.h"
-#include <errno.h>
 
 static int	get_num(char	**line, bool last_num)
 {
@@ -25,11 +24,8 @@ static int	get_num(char	**line, bool last_num)
 	while (line[0][i] && ft_isdigit(line[0][i]))
 		i++;
 	if (i > 3 || i == 0 || (!last_num && (line[0][i] && line[0][i] != ','))
-		|| (last_num && line[0][i] != '\n'))
-	{
-		ft_printf(2, "Error\nInvalid input for the colours, check specs\n");
+		|| (last_num && line[0][i]))
 		return (-42);
-	}
 	num_s = ft_calloc(i + 1, sizeof(char));
 	if (!num_s)
 		return (ft_printf(2, "Error\nCalloc failed in get_num\n"), -42);
@@ -58,15 +54,19 @@ static bool	get_colours_help(char	*line, int	*to_store_in)
 		line += 1;
 	col_r = get_num(&line, 0);
 	if (col_r < 0 || col_r > 255)
-		return (0);
+		return (ft_printf(2, "Error\nInvalid input for the colours\n"),
+			0);
 	col_g = get_num(&line, 0);
 	if (col_g < 0 || col_g > 255)
-		return (0);
+		return (ft_printf(2, "Error\nInvalid input for the colours\n"),
+			0);
 	col_b = get_num(&line, 1);
 	if (col_b < 0 || col_b > 255)
-		return (0);
+		return (ft_printf(2, "Error\nInvalid input for the colours\n"),
+			0);
 	if (col_r == -1 || col_g == -1 || col_b == -1)
-		return (0);
+		return (ft_printf(2, "Error\nInvalid input for the colours\n"),
+			0);
 	*to_store_in = col_r << 16 | col_g << 8 | col_b;
 	return (1);
 }
@@ -78,7 +78,7 @@ bool	get_colours(char	*line, t_game *game)
 	ret = 0;
 	if (ft_strncmp(line, "F", 1) == 0)
 		ret = get_colours_help(line, &game->floor);
-	if (ft_strncmp(line, "C", 1) == 0)
+	else if (ft_strncmp(line, "C", 1) == 0)
 		ret = get_colours_help(line, &game->ceiling);
-	return (ret);
+	return (free(line), ret);
 }
