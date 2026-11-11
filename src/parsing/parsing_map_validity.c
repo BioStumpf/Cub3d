@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 16:49:06 by nildruon          #+#    #+#             */
-/*   Updated: 2026/11/11 01:40:44 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/11/11 01:54:03 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static bool	are_surrondings_valid(char	**map, size_t pos_y, size_t pos_x)
 	curr_c = map[pos_y][pos_x];
 	if (curr_c == ' ')
 		return (1);
-	if ((curr_c == '0' || is_player(curr_c)) && (pos_y == 0 || pos_x == 0))
-		return (0);
 	valid_cnt = 0;
 	if ((pos_y > 0 && is_valid_surr_char(curr_c, pos_y -1, pos_x, map))
 		|| (pos_y == 0 && curr_c == '1'))
